@@ -1,6 +1,6 @@
 import sys
 import subprocess
-
+import multiprocessing
 
 main_domain = sys.argv[1]
 tmp_dir = "./tmp_results/"
@@ -21,21 +21,14 @@ def extract_subdomains(input_domain, tool_output):
                     subdomains.append(part)
     return subdomains
 
-def run_tool(tool_command, output_file_path, timeout):
+def run_tool(tool_name, tool_command, output_file_path, timeout):
     try:
         with open(f"{tmp_dir}{output_file_path}", "w") as output_file:
             subprocess.run(tool_command, stdout=output_file, timeout=timeout)
     except subprocess.TimeoutExpired:
         print(f"Command {tool_command} timed out. Continuing with the script...")
 
-
-# Run different tools
-
-for tool_name, tool_command in tools.items():
-    output_file_tmp = f"{tool_name}_{main_domain}_tmp.txt"
-    run_tool(tool_command, output_file_tmp, timeout=60*5)
-
-    with open(f"{tmp_dir}{output_file_tmp}", "r") as output_file:
+    with open(f"{tmp_dir}{output_file_path}", "r") as output_file:
         tool_output = output_file.read()
 
     result = extract_subdomains(main_domain, tool_output)
@@ -46,3 +39,15 @@ for tool_name, tool_command in tools.items():
             result_file.write(subdomain + '\n')
 
     print(f"Subdomains originating from {main_domain} using {tool_name} have been saved to {result_file_path}")
+
+if __name__ == "__main__":
+    processes = []
+    for tool_name, tool_command in tools.items():
+        output_file_tmp = f"{tool_name}_{main_domain}_tmp.txt"
+        process = multiprocessing.Process(target=run_tool, args=(tool_name, tool_command, output_file_tmp, 60*5))
+        processes.append(process)
+        process.start()
+
+    for process in processes:
+        process.join()
+
