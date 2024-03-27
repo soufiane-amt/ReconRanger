@@ -1,6 +1,7 @@
 import sys
 import subprocess
 import multiprocessing
+import os
 
 main_domain = sys.argv[1]
 tmp_dir = "./tmp_results/"
@@ -22,11 +23,12 @@ def extract_subdomains(input_domain, tool_output):
     return subdomains
 
 def run_tool(tool_name, tool_command, output_file_path, timeout):
-    try:
-        with open(f"{tmp_dir}{output_file_path}", "w") as output_file:
-            subprocess.run(tool_command, stdout=output_file, timeout=timeout)
-    except subprocess.TimeoutExpired:
-        print(f"Command {tool_command} timed out. Continuing with the script...")
+    with open(os.devnull, 'w') as devnull:
+        try:
+            with open(f"{tmp_dir}{output_file_path}", "w") as output_file:
+                subprocess.run(tool_command, stdout=output_file, stderr=devnull, timeout=timeout)
+        except subprocess.TimeoutExpired:
+            print(f"Command {tool_command} timed out. Continuing with the script...")
 
     with open(f"{tmp_dir}{output_file_path}", "r") as output_file:
         tool_output = output_file.read()
@@ -50,4 +52,3 @@ if __name__ == "__main__":
 
     for process in processes:
         process.join()
-
