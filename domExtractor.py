@@ -10,7 +10,7 @@ def extract_subdomains(input_domain, amass_output):
             for part in parts:
                 if part != input_domain and part.endswith(input_domain):
                         subdomains.append(part)
-    return subdomains
+    return subdomains 
 
 main_domain = sys.argv[1]
 output_file_tmp = "amass_passive_"+main_domain+"_tmp.txt"
