@@ -2,6 +2,15 @@ import sys
 import subprocess
 
 
+main_domain = sys.argv[1]
+tmp_dir = "./tmp_results/"
+
+tools = {
+    "amass": ["amass", "enum", "-passive", "-d", main_domain],
+    "subfinder": ["subfinder", "-d", main_domain],
+    # Add more tools and their respective commands here
+}
+
 def extract_subdomains(input_domain, tool_output):
     subdomains = []
     for line in tool_output.split('\n'):
@@ -14,25 +23,19 @@ def extract_subdomains(input_domain, tool_output):
 
 def run_tool(tool_command, output_file_path, timeout):
     try:
-        with open(output_file_path, "w") as output_file:
+        with open(f"{tmp_dir}{output_file_path}", "w") as output_file:
             subprocess.run(tool_command, stdout=output_file, timeout=timeout)
     except subprocess.TimeoutExpired:
         print(f"Command {tool_command} timed out. Continuing with the script...")
 
-main_domain = sys.argv[1]
 
 # Run different tools
-tools = {
-    "amass": ["amass", "enum", "-passive", "-d", main_domain],
-    "subfinder": ["subfinder", "-d", main_domain],
-    # Add more tools and their respective commands here
-}
 
 for tool_name, tool_command in tools.items():
     output_file_tmp = f"{tool_name}_{main_domain}_tmp.txt"
     run_tool(tool_command, output_file_tmp, timeout=60*5)
 
-    with open(output_file_tmp, "r") as output_file:
+    with open(f"{tmp_dir}{output_file_tmp}", "r") as output_file:
         tool_output = output_file.read()
 
     result = extract_subdomains(main_domain, tool_output)
