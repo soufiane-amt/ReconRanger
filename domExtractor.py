@@ -48,12 +48,16 @@ def run_tool(tool_name, tool_command, output_file_path, timeout):
 
     print(f"Subdomains originating from {main_domain} using {tool_name} have been saved to {result_file_path}")
 
+
 def collect_domains_in_single_result_file():
+    unique_domains = set()
     with open(f"{main_domain}_total_domains.txt", "a") as output_file:
         for tool_name, tool_command in tools.items():
-            with open(f"{tools_result}{tool_name}_subdomains.txt", "r") as tool_ouput:
-                output_file.write(tool_ouput.read())
-
+            with open(f"{tools_result}{tool_name}_subdomains.txt", "r") as tool_output:
+                for domain in tool_output:
+                    if domain not in unique_domains:
+                        output_file.write(domain + '\n')
+                        unique_domains.add(domain)
 
 
 
