@@ -1,0 +1,7 @@
+tools:
+  - name: amass
+    command: amass enum -passive -d {domain}
+    timeout: 180
+  - name: subfinder
+    command: subfinder -d {domain}
+    timeout: 120
