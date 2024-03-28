@@ -1,7 +1,20 @@
 tools:
+  # Passive enumaration
   - name: amass
     command: amass enum -passive -d {domain}
-    timeout: 180
+    timeout: 2
   - name: subfinder
     command: subfinder -d {domain}
-    timeout: 120
+    timeout: 2
+  - name: sublist3r
+    command: sublist3r -d {domain}
+    timeout: 2
+  # Active enumaration
+  - name: subfinder
+    command: - amass enum -active -d {domain} -brute -w /usr/share/amass/wordlists/deepmagic.com_top50kprefixes.txt 
+    timeout: 2
+
+# this tool doesn't appeal to our parsing mechism
+# gobuster dir -u http://google.com -w /usr/share/seclists/Discovery/Web-Content/common.txt -r -b 302 -b 404 --timeout 50s -t 5
+
+# dnsrecon -d google.com -D /usr/share/dnsrecon/subdomains-top1mil-5000.txt  -t brt

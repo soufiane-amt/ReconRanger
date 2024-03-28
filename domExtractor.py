@@ -46,7 +46,7 @@ def run_tool(tool_name, tool_command, output_file_path, timeout):
 
     result_file_path = f"{tools_result}{tool_name}_subdomains.txt"
     print(f'Creating file of {tool_name} in {result_file_path}')
-    with open(result_file_path, "w") as result_file:
+    with open(result_file_path, "a") as result_file:
         for subdomain in result:
             result_file.write(subdomain + '\n')
 
@@ -75,7 +75,7 @@ if __name__ == "__main__":
     for tool_name, (tool_command, timeout) in tools.items():
         print()
         output_file_tmp = f"{tool_name}_{main_domain}_tmp.txt"
-        process = multiprocessing.Process(target=run_tool, args=(tool_name, tool_command.split(), output_file_tmp, timeout))
+        process = multiprocessing.Process(target=run_tool, args=(tool_name, tool_command.split(), output_file_tmp, timeout*60))
         processes.append(process)
         process.start()
 
