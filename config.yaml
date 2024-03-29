@@ -1,22 +1,26 @@
 tools:
   # Passive enumaration
-  domain_enumeration:
-    - name: amass
-      command: amass enum -passive -d {domain}
-      timeout: 5
-    - name: subfinder
-      command: subfinder -d {domain}
-      timeout: 5
-    - name: sublist3r
-      command: sublist3r -d {domain}
-      timeout: 5
+  # domain_enumeration:
+    # - name: amass
+    #   command: amass enum -passive -d {domain}
+    #   timeout: 15
+    # - name: subfinder
+    #   command: subfinder -d {domain}
+    #   timeout: 15
+    # - name: sublist3r
+    #   command: sublist3r -d {domain}
+    #   timeout: 15
     # Active enumaration
-    - name: subfinder
-      command: amass enum -active -d {domain} -brute -w /usr/share/amass/wordlists/deepmagic.com_top50kprefixes.txt 
-      timeout: 5
-    - name: dnsrecon
-      command: dnsrecon -d {domain} -D /usr/share/dnsrecon/subdomains-top1mil-5000.txt  -t brt 
-      timeout: 5
+    # - name: subfinder
+    #   command: amass enum -active -d {domain} -brute -w /usr/share/amass/wordlists/deepmagic.com_top50kprefixes.txt 
+    #   timeout: 15
+    # - name: dnsrecon
+    #   command: dnsrecon -d {domain} -D /usr/share/dnsrecon/subdomains-top1mil-5000.txt  -t brt 
+    #   timeout: 15
+  permutation:
+    - name: altdns
+      command: altdns -i facebook.com_total_domains.txt -o tools_extracted_result/outFile.txt -w src/words.txt -r -s results_output.txt
+      timeout: 3
   # directory_enumeration:
   #   - name: sublist3r
   #     command: gobuster dir -u {domain} w /usr/share/seclists/Discovery/Web-Content/common.txt -r -b 302 -b 404 --timeout 50s -t 5
