@@ -78,9 +78,10 @@ def run_tool(tool_name, tool_command, output_file_path, timeout):
 
 def collect_domains_in_single_result_file():
     unique_domains = set()
+    print ('-------Tools', tools)
     with open(f"{main_domain}_total_domains.txt", "a") as output_file:
         for tool_name, tool_info in tools.items():
-            if tool_info.get('type') == 'permutation' :
+            if tool_info.get('type') == 'permutation':
                 continue
             with open(f"{tools_result}{tool_name}_{main_domain}_subdomains.txt", "r") as tool_output:
                 for domain in tool_output:
@@ -88,6 +89,21 @@ def collect_domains_in_single_result_file():
                         output_file.write(domain)
                         unique_domains.add(domain)
 
+#Add the results of permutataion tools to the total domains file
+# use extract_subdomains to extract the domains from the output of  total domains file
+def collect_permutation_domains():
+    print('+++++++++=====>', tools)
+    existing_domains = set(extract_subdomains(main_domain, open(f"{main_domain}_total_domains.txt").read()))
+    permutation_result = f"{tools_result}altdns_{main_domain}_subdomains_permuted.txt"
+    if os.path.isfile(permutation_result):
+        with open(permutation_result, "r") as tool_output:
+            with open(f"{main_domain}_total_domains.txt", "a") as output_file:
+                permutation_domains = tool_output.read().split()
+                for domain in permutation_domains:
+                    if domain not in existing_domains:
+                        output_file.write(domain)
+                        print(f"Adding {domain} to {main_domain}_total_domains.txt")
+                        existing_domains.add(domain)
 
 def remove_color(text):
     ansi_escape = re.compile(r'\033\[[0-9;]*m')
@@ -112,6 +128,9 @@ def launch_subdomain_permutation(commands):
                 for domain in domains:
                     result_file.write(domain+"\n")
             print(f"Subdomains obtained from permutation using {tool_name} have been saved to {result_file_path}")
+        except subprocess.TimeoutExpired:
+            print(f"Command '{command['command']}' timed out after {command['timeout']} minutes. Continuing with the script...")
+            continue
         except subprocess.CalledProcessError as e:
             print(f"Error occurred while running {tool_name}: {e}")
             continue
@@ -141,3 +160,4 @@ if __name__ == "__main__":
     collect_domains_in_single_result_file()
     permutation_tools = {tool_name: tool_info for tool_name, tool_info in tools.items() if tool_info.get('type') == 'permutation'}
     launch_subdomain_permutation(permutation_tools)
+    collect_permutation_domains()
