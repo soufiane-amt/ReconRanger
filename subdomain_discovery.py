@@ -66,7 +66,7 @@ def run_tool(tool_name, tool_command, output_file_path, timeout):
 
     result = extract_subdomains(main_domain, tool_output)
 
-    result_file_path = f"{tools_result}{tool_name}_subdomains.txt"
+    result_file_path = f"{tools_result}{tool_name}_{main_domain}_subdomains.txt"
     print(f'Creating file of {tool_name} in {result_file_path}')
     with open(result_file_path, "a") as result_file:
         for subdomain in result:
@@ -80,7 +80,9 @@ def collect_domains_in_single_result_file():
     unique_domains = set()
     with open(f"{main_domain}_total_domains.txt", "a") as output_file:
         for tool_name, tool_info in tools.items():
-            with open(f"{tools_result}{tool_name}_subdomains.txt", "r") as tool_output:
+            if tool_info.get('type') == 'permutation' :
+                continue
+            with open(f"{tools_result}{tool_name}_{main_domain}_subdomains.txt", "r") as tool_output:
                 for domain in tool_output:
                     if domain not in unique_domains:
                         output_file.write(domain)
@@ -88,10 +90,7 @@ def collect_domains_in_single_result_file():
 
 
 def remove_color(text):
-    # Define regex pattern to match ANSI escape codes for color formatting
     ansi_escape = re.compile(r'\033\[[0-9;]*m')
-
-    # Remove ANSI escape codes from the text
     return ansi_escape.sub('', text)
 
 
@@ -100,10 +99,14 @@ def launch_subdomain_permutation(commands):
     for tool_name, command in commands.items():
         try:
             print(f'{tool_name} is running ... ')
-            output = subprocess.run(command['command'], shell=True, check=True, capture_output=True, text=True)
+            print(f'Command :', command['command'])
+            command['command'] = command['command'].replace('altdns_output.txt', f'altdns_output_{main_domain}_tmp.txt')
+            command['command'] = command['command'].replace('outFile.txt', f'altdns_output_{main_domain}.txt')
+            
+            output = subprocess.run(command['command'], shell=True, check=True, stderr=subprocess.DEVNULL, stdout=subprocess.PIPE, text=True, timeout=command['timeout']*60)
             result = remove_color(output.stdout)
             # Process the result as needed
-            result_file_path = f"{tools_result}{tool_name}_subdomains_permuted.txt"
+            result_file_path = f"{tools_result}{tool_name}_{main_domain}_subdomains_permuted.txt"
             with open(result_file_path, "w") as result_file:
                 domains = altdns_parse_domains(result)
                 for domain in domains:
@@ -115,24 +118,26 @@ def launch_subdomain_permutation(commands):
 
 
 if __name__ == "__main__":
-    # if len(sys.argv) < 2:
-    #     print("Usage: python script.py <domain>")
-    #     sys.exit(1)
+    if len(sys.argv) < 2:
+        print("Usage: python script.py <domain>")
+        sys.exit(1)
     config_file = "config.yaml"
     tools = parse_config(config_file)
-    # processes = []
-    # for tool_name, tool_info in tools.items():
-    #     tool_command = tool_info['command']
-    #     timeout = tool_info['timeout']
-    #     tool_type = tool_info['type']
-    #     output_file_tmp = f"{tool_name}_{main_domain}_tmp.txt"
-    #     process = multiprocessing.Process(target=run_tool, args=(tool_name, tool_command.split(), output_file_tmp, timeout*60))
-    #     processes.append(process)
-    #     process.start()
+    processes = []
+    for tool_name, tool_info in tools.items():
+        tool_command = tool_info['command']
+        timeout = tool_info['timeout']
+        tool_type = tool_info['type']
+        if tool_type == 'permutation':
+            continue
+        output_file_tmp = f"{tool_name}_{main_domain}_tmp.txt"
+        print(f"Running {tool_name} with command: {tool_command}")
+        process = multiprocessing.Process(target=run_tool, args=(tool_name, tool_command.split(), output_file_tmp, timeout*60))
+        processes.append(process)
+        process.start()
 
-    # for process in processes:
-    #     process.join()
-    # collect_domains_in_single_result_file()
+    for process in processes:
+        process.join()
+    collect_domains_in_single_result_file()
     permutation_tools = {tool_name: tool_info for tool_name, tool_info in tools.items() if tool_info.get('type') == 'permutation'}
-    print(permutation_tools)
     launch_subdomain_permutation(permutation_tools)
