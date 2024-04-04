@@ -92,18 +92,20 @@ def collect_domains_in_single_result_file():
 #Add the results of permutataion tools to the total domains file
 # use extract_subdomains to extract the domains from the output of  total domains file
 def collect_permutation_domains():
-    print('+++++++++=====>', tools)
+    # print('+++++++++=====>', tools)
     existing_domains = set(extract_subdomains(main_domain, open(f"{main_domain}_total_domains.txt").read()))
-    permutation_result = f"{tools_result}altdns_{main_domain}_subdomains_permuted.txt"
+    permutation_result = f"{tools_result}altdns_output_{main_domain}.txt"
+    # print ('existing domaines : ===>', os.path.isfile(permutation_result))
     if os.path.isfile(permutation_result):
         with open(permutation_result, "r") as tool_output:
             with open(f"{main_domain}_total_domains.txt", "a") as output_file:
                 permutation_domains = tool_output.read().split()
                 for domain in permutation_domains:
                     if domain not in existing_domains:
-                        output_file.write(domain)
+                        output_file.write(domain+'\n')
                         print(f"Adding {domain} to {main_domain}_total_domains.txt")
                         existing_domains.add(domain)
+
 
 def remove_color(text):
     ansi_escape = re.compile(r'\033\[[0-9;]*m')
