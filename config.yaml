@@ -21,6 +21,7 @@ tools:
     - name: altdns
       command: altdns -i facebook.com_total_domains.txt -o tools_extracted_result/outFile.txt -w src/words.txt -r -s tmp_results/altdns_output.txt
       timeout: 2
+
   # directory_enumeration:
   #   - name: sublist3r
   #     command: gobuster dir -u {domain} w /usr/share/seclists/Discovery/Web-Content/common.txt -r -b 302 -b 404 --timeout 50s -t 5

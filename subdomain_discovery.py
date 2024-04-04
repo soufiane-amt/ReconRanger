@@ -137,6 +137,12 @@ def launch_subdomain_permutation(commands):
             print(f"Error occurred while running {tool_name}: {e}")
             continue
 
+def select_active_domains():
+    file_path = f"{main_domain}_total_domains.txt"
+    if os.path.isfile(file_path):
+        with open(f"active_{main_domain}_total_domains.txt", "w") as output_file:
+            subprocess.run(f"cat {file_path} | httprobe | grep https", shell=True, check=True, stderr=subprocess.DEVNULL, stdout=output_file, text=True)
+
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
@@ -145,21 +151,22 @@ if __name__ == "__main__":
     config_file = "config.yaml"
     tools = parse_config(config_file)
     processes = []
-    for tool_name, tool_info in tools.items():
-        tool_command = tool_info['command']
-        timeout = tool_info['timeout']
-        tool_type = tool_info['type']
-        if tool_type == 'permutation':
-            continue
-        output_file_tmp = f"{tool_name}_{main_domain}_tmp.txt"
-        print(f"Running {tool_name} with command: {tool_command}")
-        process = multiprocessing.Process(target=run_tool, args=(tool_name, tool_command.split(), output_file_tmp, timeout*60))
-        processes.append(process)
-        process.start()
+    # for tool_name, tool_info in tools.items():
+    #     tool_command = tool_info['command']
+    #     timeout = tool_info['timeout']
+    #     tool_type = tool_info['type']
+    #     if tool_type == 'permutation':
+    #         continue
+    #     output_file_tmp = f"{tool_name}_{main_domain}_tmp.txt"
+    #     print(f"Running {tool_name} with command: {tool_command}")
+    #     process = multiprocessing.Process(target=run_tool, args=(tool_name, tool_command.split(), output_file_tmp, timeout*60))
+    #     processes.append(process)
+    #     process.start()
 
-    for process in processes:
-        process.join()
-    collect_domains_in_single_result_file()
-    permutation_tools = {tool_name: tool_info for tool_name, tool_info in tools.items() if tool_info.get('type') == 'permutation'}
-    launch_subdomain_permutation(permutation_tools)
-    collect_permutation_domains()
+    # for process in processes:
+    #     process.join()
+    # collect_domains_in_single_result_file()
+    # permutation_tools = {tool_name: tool_info for tool_name, tool_info in tools.items() if tool_info.get('type') == 'permutation'}
+    # launch_subdomain_permutation(permutation_tools)
+    # collect_permutation_domains()
+    select_active_domains()
