@@ -103,7 +103,6 @@ def collect_permutation_domains():
                 for domain in permutation_domains:
                     if domain not in existing_domains:
                         output_file.write(domain+'\n')
-                        print(f"Adding {domain} to {main_domain}_total_domains.txt")
                         existing_domains.add(domain)
 
 
@@ -144,6 +143,15 @@ def select_active_domains():
             subprocess.run(f"cat {file_path} | httprobe | grep https", shell=True, check=True, stderr=subprocess.DEVNULL, stdout=output_file, text=True)
 
 
+def screenshot_domains (command):
+    try:    
+        command['command'] = command['command'].replace('urls.txt', f'active_{main_domain}_total_domains.txt')
+        subprocess.run(command['command'], shell=True, check=True, stderr=subprocess.DEVNULL, stdout=subprocess.PIPE, text=True, timeout=command['timeout']*60)
+    except subprocess.TimeoutExpired:
+        print(f"Command '{command['command']}' timed out after {command['timeout']} minutes. Continuing with the script...")
+    except subprocess.CalledProcessError as e:
+        print(f"Error occurred while running {tool_name}: {e}")
+
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: python script.py <domain>")
@@ -151,22 +159,27 @@ if __name__ == "__main__":
     config_file = "config.yaml"
     tools = parse_config(config_file)
     processes = []
-    # for tool_name, tool_info in tools.items():
-    #     tool_command = tool_info['command']
-    #     timeout = tool_info['timeout']
-    #     tool_type = tool_info['type']
-    #     if tool_type == 'permutation':
-    #         continue
-    #     output_file_tmp = f"{tool_name}_{main_domain}_tmp.txt"
-    #     print(f"Running {tool_name} with command: {tool_command}")
-    #     process = multiprocessing.Process(target=run_tool, args=(tool_name, tool_command.split(), output_file_tmp, timeout*60))
-    #     processes.append(process)
-    #     process.start()
+    for tool_name, tool_info in tools.items():
+        tool_command = tool_info['command']
+        timeout = tool_info['timeout']
+        tool_type = tool_info['type']
+        if tool_type == 'permutation':
+            continue
+        output_file_tmp = f"{tool_name}_{main_domain}_tmp.txt"
+        print(f"Running {tool_name} with command: {tool_command}")
+        process = multiprocessing.Process(target=run_tool, args=(tool_name, tool_command.split(), output_file_tmp, timeout*60))
+        processes.append(process)
+        process.start()
 
-    # for process in processes:
-    #     process.join()
-    # collect_domains_in_single_result_file()
-    # permutation_tools = {tool_name: tool_info for tool_name, tool_info in tools.items() if tool_info.get('type') == 'permutation'}
-    # launch_subdomain_permutation(permutation_tools)
-    # collect_permutation_domains()
+    for process in processes:
+        process.join()
+    collect_domains_in_single_result_file()
+    permutation_tools = {tool_name: tool_info for tool_name, tool_info in tools.items() if tool_info.get('type') == 'permutation'}
+    launch_subdomain_permutation(permutation_tools)
+    collect_permutation_domains()
     select_active_domains()
+    permutation_tool = {tool_name: tool_info for tool_name, tool_info in tools.items() if tool_info.get('type') == 'screenshot'}
+    print(permutation_tool)
+
+    screenshot_tool_name = list(permutation_tool.keys())[0]
+    screenshot_domains(permutation_tool.get(screenshot_tool_name))
