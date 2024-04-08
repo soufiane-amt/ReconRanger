@@ -3,27 +3,27 @@ tools:
   domain_enumeration:
     - name: amass
       command: amass enum -passive -d {domain}
-      timeout: 15
+      timeout: 2
     - name: subfinder
       command: subfinder -d {domain}
-      timeout: 15
+      timeout: 2
     - name: sublist3r
       command: sublist3r -d {domain}
-      timeout: 15
+      timeout: 2
     # Active enumaration
     - name: subfinder
       command: amass enum -active -d {domain} -brute -w /usr/share/amass/wordlists/deepmagic.com_top50kprefixes.txt 
-      timeout: 15
+      timeout: 2
     - name: dnsrecon
       command: dnsrecon -d {domain} -D /usr/share/dnsrecon/subdomains-top1mil-5000.txt  -t brt 
-      timeout: 15
+      timeout: 2
   permutation:
     - name: altdns
       command: altdns -i facebook.com_total_domains.txt -o tools_extracted_result/outFile.txt -w src/words.txt -r -s tmp_results/altdns_output.txt
-      timeout: 5
+      timeout: 2
   screenshot:
     - name: eyewitness
-      command: eyewitness -f urls.txt --web
+      command: eyewitness -f urls.txt --web -d out_dir
       timeout: 500
   # directory_enumeration:
   #   - name: sublist3r

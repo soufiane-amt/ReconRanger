@@ -6,5 +6,5 @@ all: clean
 clean:
 	@rm -rf ${TMP_RES_DIR}*
 	@rm -rf ${TOOL_RES_DIR}*
-	@rm -f *.txt *.log
-	@rm -fr 2024*
+	@rm -f *.txt *.log 
+	@rm -fr 2024* *_screenshot
