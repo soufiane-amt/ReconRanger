@@ -151,7 +151,7 @@ def select_active_domains():
 
 
 def check_eyewitness_report():
-    report_files = os.listdir(f'./{main_domain}_screenshot')
+    report_files = os.listdir(f"./{main_domain}_screenshot")
     for file in report_files:
         if file.endswith(".html"):  # Assuming the report is in HTML format
             return True
@@ -161,22 +161,31 @@ def periodic_check(interval):
     while True:
         if check_eyewitness_report():
             print("Eyewitness report prepared successfully.")
-            kill_current_process()
+            # kill_current_process()
             break
         else:
             print("Eyewitness report not found. Checking again in 5 seconds...")
             time.sleep(interval)
 
 
+
 def screenshot_domains (command):
-    try:    
-        command['command'] = command['command'].replace('urls.txt', f'active_{main_domain}_total_domains.txt')
-        command['command'] = command['command'].replace('out_dir', f'{main_domain}_screenshot')
-        subprocess.run(command['command'], shell=True, check=True, stderr=subprocess.DEVNULL, stdout=subprocess.PIPE, text=True, timeout=command['timeout']*60)
-    except subprocess.TimeoutExpired:
-        print(f"Command '{command['command']}' timed out after {command['timeout']} minutes. Continuing with the script...")
-    # except subprocess.CalledProcessError as e:
-    #     print(f"Error occurred while running {tool_name}: {e}")
+    command['command'] = command['command'].replace('urls.txt', f'active_{main_domain}_total_domains.txt')
+    command['command'] = command['command'].replace('out_dir', f'{main_domain}_screenshot')
+    # process = subprocess.Popen(command['command'], shell=True, stderr=subprocess.DEVNULL, stdout=subprocess.PIPE, text=True)
+    process = subprocess.Popen(command['command'], shell=True)
+    i = 0
+    while True:
+        # print(f'{i}--------Screenshoting is ongiong--------\n')
+        # print(os.path.isfile(f"./{main_domain}_screenshot/report.html"))
+        # print(os.path.isfile("./test"))
+        # i+=1
+        if os.path.isfile(f"./{main_domain}_screenshot/report.html"):
+            # Terminate the subprocess once the report is created
+            process.terminate()
+            print("Report created. Terminating subprocess.")
+            break
+        time.sleep(1)  # Check every second
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
@@ -185,31 +194,27 @@ if __name__ == "__main__":
     config_file = "config.yaml"
     tools = parse_config(config_file)
     processes = []
-    # for tool_name, tool_info in tools.items():
-    #     tool_command = tool_info['command']
-    #     timeout = tool_info['timeout']
-    #     tool_type = tool_info['type']
-    #     if tool_type in ['permutation', 'screenshot']:
-    #         continue
-    #     output_file_tmp = f"{tool_name}_{main_domain}_tmp.txt"
-    #     print(f"Running {tool_name} with command: {tool_command}")
-    #     process = multiprocessing.Process(target=run_tool, args=(tool_name, tool_command.split(), output_file_tmp, timeout*60))
-    #     processes.append(process)
-    #     process.start()
+    for tool_name, tool_info in tools.items():
+        tool_command = tool_info['command']
+        timeout = tool_info['timeout']
+        tool_type = tool_info['type']
+        if tool_type in ['permutation', 'screenshot']:
+            continue
+        output_file_tmp = f"{tool_name}_{main_domain}_tmp.txt"
+        print(f"Running {tool_name} with command: {tool_command}")
+        process = multiprocessing.Process(target=run_tool, args=(tool_name, tool_command.split(), output_file_tmp, timeout*60))
+        processes.append(process)
+        process.start()
 
-    # for process in processes:
-    #     process.join()
-    # collect_domains_in_single_result_file()
-    # permutation_tools = {tool_name: tool_info for tool_name, tool_info in tools.items() if tool_info.get('type') == 'permutation'}
-    # launch_subdomain_permutation(permutation_tools)
-    # collect_permutation_domains()
-    # select_active_domains()
+    for process in processes:
+        process.join()
+    collect_domains_in_single_result_file()
+    permutation_tools = {tool_name: tool_info for tool_name, tool_info in tools.items() if tool_info.get('type') == 'permutation'}
+    launch_subdomain_permutation(permutation_tools)
+    collect_permutation_domains()
+    select_active_domains()
     screening_tool = {tool_name: tool_info for tool_name, tool_info in tools.items() if tool_info.get('type') == 'screenshot'}
-    print(screening_tool)
 
     screenshot_tool_name = list(screening_tool.keys())[0]
     screenshot_domains(screening_tool.get(screenshot_tool_name))
-    interval = 5  # Check every 5 seconds
-    thread = threading.Thread(target=periodic_check, args=(interval,))
-    thread.start()
 
