@@ -1,0 +1,168 @@
+1713451747027	geckodriver	INFO	Listening on 127.0.0.1:51581
+1713451747604	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/usr ... ss" "--remote-debugging-port" "56907" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofiles7N6FU"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713451748060	Marionette	INFO	Marionette enabled
+1713451748183	Marionette	INFO	Listening on port 40119
+Read port: 40119
+WebDriver BiDi listening on ws://127.0.0.1:56907
+1713451748299	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+DevTools listening on ws://127.0.0.1:56907/devtools/browser/aec89e21-e641-43fe-a12b-59c2e490e5bf
+1713451750444	geckodriver	INFO	Listening on 127.0.0.1:58875
+1713451750518	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/usr ... ss" "--remote-debugging-port" "37653" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileIl6Aja"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713451750976	Marionette	INFO	Marionette enabled
+1713451751074	Marionette	INFO	Listening on port 43041
+WebDriver BiDi listening on ws://127.0.0.1:37653
+Read port: 43041
+1713451751348	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3ihVQ4/yl/l/en_US/QHboYVclAZ2.js?_nc_x=Ij3Wp8lg5Kz, line 21: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+DevTools listening on ws://127.0.0.1:37653/devtools/browser/04109335-5841-4bc8-8722-c05daf26efbf
+1713451753612	geckodriver	INFO	Listening on 127.0.0.1:38183
+1713451753717	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/usr ... ss" "--remote-debugging-port" "39005" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilegFc1Sf"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713451754313	Marionette	INFO	Marionette enabled
+1713451754490	Marionette	INFO	Listening on port 35193
+Read port: 35193
+WebDriver BiDi listening on ws://127.0.0.1:39005
+1713451754683	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3i_Ou4/y5/l/en_GB/QHboYVclAZ2.js?_nc_x=Ij3Wp8lg5Kz, line 21: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+DevTools listening on ws://127.0.0.1:39005/devtools/browser/01ac942e-3e08-426c-9aef-3268c88357e9
+1713451757759	geckodriver	INFO	Listening on 127.0.0.1:42779
+1713451757914	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/usr ... ss" "--remote-debugging-port" "34753" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofile8P9IBe"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713451758863	Marionette	INFO	Marionette enabled
+1713451759073	Marionette	INFO	Listening on port 37829
+WebDriver BiDi listening on ws://127.0.0.1:34753
+Read port: 37829
+1713451759793	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3i_Ou4/y5/l/en_GB/QHboYVclAZ2.js?_nc_x=Ij3Wp8lg5Kz, line 21: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3i_Ou4/y5/l/en_GB/QHboYVclAZ2.js?_nc_x=Ij3Wp8lg5Kz, line 21: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.error: ({})
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3i_Ou4/y5/l/en_GB/QHboYVclAZ2.js?_nc_x=Ij3Wp8lg5Kz, line 21: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+DevTools listening on ws://127.0.0.1:34753/devtools/browser/ac7de2d5-1229-452b-a4ab-9e8e0f1a6556
+1713451764364	geckodriver	INFO	Listening on 127.0.0.1:33903
+1713451764938	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/usr ... ss" "--remote-debugging-port" "44569" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileNacb5o"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713451766073	Marionette	INFO	Marionette enabled
+1713451766435	Marionette	INFO	Listening on port 45515
+Read port: 45515
+WebDriver BiDi listening on ws://127.0.0.1:44569
+1713451766926	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3ihVQ4/yl/l/en_US/QHboYVclAZ2.js?_nc_x=Ij3Wp8lg5Kz, line 21: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3i_Ou4/y5/l/en_GB/QHboYVclAZ2.js?_nc_x=Ij3Wp8lg5Kz, line 21: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+DevTools listening on ws://127.0.0.1:44569/devtools/browser/e5df08d6-c927-4670-98d4-6a25c266e452
+1713451771843	geckodriver	INFO	Listening on 127.0.0.1:37833
+1713451772011	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/usr ... ss" "--remote-debugging-port" "56961" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilePjEgI2"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713451773474	Marionette	INFO	Marionette enabled
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3i_Ou4/y5/l/en_GB/QHboYVclAZ2.js?_nc_x=Ij3Wp8lg5Kz, line 21: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1713451773921	Marionette	INFO	Listening on port 40633
+WebDriver BiDi listening on ws://127.0.0.1:56961
+Read port: 40633
+1713451774418	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3i_Ou4/y5/l/en_GB/QHboYVclAZ2.js?_nc_x=Ij3Wp8lg5Kz, line 21: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+console.error: "update.locale" " file doesn't exist in either the application or GRE directories"
+1713451778102	addons.xpi	ERROR	System addon update list error SyntaxError: The URI is malformed.
+console.error: ({})
+DevTools listening on ws://127.0.0.1:56961/devtools/browser/44ea26d3-bd17-41bf-bb14-400dd78e7741
+1713451780724	geckodriver	INFO	Listening on 127.0.0.1:34363
+1713451781166	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/usr ... ss" "--remote-debugging-port" "42495" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileBIH2Zc"
+console.error: "update.locale" " file doesn't exist in either the application or GRE directories"
+1713451781307	addons.xpi	ERROR	System addon update list error SyntaxError: The URI is malformed.
+*** You are running in headless mode.
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3ihVQ4/yl/l/en_US/QHboYVclAZ2.js?_nc_x=Ij3Wp8lg5Kz, line 21: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3ihVQ4/yl/l/en_US/QHboYVclAZ2.js?_nc_x=Ij3Wp8lg5Kz, line 21: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1713451784157	Marionette	INFO	Marionette enabled
+console.error: "update.locale" " file doesn't exist in either the application or GRE directories"
+1713451784348	addons.xpi	ERROR	System addon update list error SyntaxError: The URI is malformed.
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3i_Ou4/y5/l/en_GB/QHboYVclAZ2.js?_nc_x=Ij3Wp8lg5Kz, line 21: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1713451785076	Marionette	INFO	Listening on port 36089
+Read port: 36089
+WebDriver BiDi listening on ws://127.0.0.1:42495
+1713451785498	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3i_Ou4/y5/l/en_GB/QHboYVclAZ2.js?_nc_x=Ij3Wp8lg5Kz, line 21: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.error: "update.locale" " file doesn't exist in either the application or GRE directories"
+1713451788881	addons.xpi	ERROR	System addon update list error SyntaxError: The URI is malformed.
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3ihVQ4/yl/l/en_US/QHboYVclAZ2.js?_nc_x=Ij3Wp8lg5Kz, line 21: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.error: "update.locale" " file doesn't exist in either the application or GRE directories"
+1713451796128	addons.xpi	ERROR	System addon update list error SyntaxError: The URI is malformed.
+DevTools listening on ws://127.0.0.1:42495/devtools/browser/9f644c48-679c-44b2-844f-840b33e567ee
+1713451797304	geckodriver	INFO	Listening on 127.0.0.1:56909
+1713451798200	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/usr ... ss" "--remote-debugging-port" "57765" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileeA2zml"
+*** You are running in headless mode.
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3i_Ou4/y5/l/en_GB/QHboYVclAZ2.js?_nc_x=Ij3Wp8lg5Kz, line 21: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3i_Ou4/y5/l/en_GB/QHboYVclAZ2.js?_nc_x=Ij3Wp8lg5Kz, line 21: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1713451803235	Marionette	INFO	Marionette enabled
+console.error: "update.locale" " file doesn't exist in either the application or GRE directories"
+1713451803493	addons.xpi	ERROR	System addon update list error SyntaxError: The URI is malformed.
+1713451803866	Marionette	INFO	Listening on port 36759
+Read port: 36759
+WebDriver BiDi listening on ws://127.0.0.1:57765
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3i_Ou4/y5/l/en_GB/QHboYVclAZ2.js?_nc_x=Ij3Wp8lg5Kz, line 21: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1713451804785	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.

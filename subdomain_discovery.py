@@ -8,9 +8,6 @@ import re
 import threading
 import signal
 
-def kill_current_process():
-    current_pid = os.getpid()  # Get the current process ID
-    os.kill(current_pid, signal.SIGTERM)  # Terminate the current process
 
 main_domain = sys.argv[1]
 tmp_dir = "./tmp_results/"
@@ -85,7 +82,6 @@ def run_tool(tool_name, tool_command, output_file_path, timeout):
 
 def collect_domains_in_single_result_file():
     unique_domains = set()
-    print ('-------Tools', tools)
     with open(f"{main_domain}_total_domains.txt", "a") as output_file:
         for tool_name, tool_info in tools.items():
             if tool_info.get('type') in ['permutation', 'screenshot']:
@@ -172,14 +168,9 @@ def periodic_check(interval):
 def screenshot_domains (command):
     command['command'] = command['command'].replace('urls.txt', f'active_{main_domain}_total_domains.txt')
     command['command'] = command['command'].replace('out_dir', f'{main_domain}_screenshot')
-    # process = subprocess.Popen(command['command'], shell=True, stderr=subprocess.DEVNULL, stdout=subprocess.PIPE, text=True)
     process = subprocess.Popen(command['command'], shell=True)
     i = 0
     while True:
-        # print(f'{i}--------Screenshoting is ongiong--------\n')
-        # print(os.path.isfile(f"./{main_domain}_screenshot/report.html"))
-        # print(os.path.isfile("./test"))
-        # i+=1
         if os.path.isfile(f"./{main_domain}_screenshot/report.html"):
             # Terminate the subprocess once the report is created
             process.terminate()
